@@ -277,7 +277,7 @@
         <p class="pack-count">9 Prompts</p>
         <p class="pack-desc">Personalized emails that get responses.</p>
         <div class="free-label">FREE</div>
-        <button class="get-btn" onclick="openModal('Cold Outreach')">Get Free Pack</button>
+        <button class="get-btn" onclick="openModal()">Get Free Pack</button>
       </div>
       
       <div class="pack-card">
@@ -286,7 +286,7 @@
         <p class="pack-count">9 Prompts</p>
         <p class="pack-desc">Build your professional brand.</p>
         <div class="free-label">FREE</div>
-        <button class="get-btn" onclick="openModal('LinkedIn Content')">Get Free Pack</button>
+        <button class="get-btn" onclick="openModal()">Get Free Pack</button>
       </div>
       
       <div class="pack-card">
@@ -295,7 +295,7 @@
         <p class="pack-count">9 Prompts</p>
         <p class="pack-desc">Viral hooks, threads, engagement.</p>
         <div class="free-label">FREE</div>
-        <button class="get-btn" onclick="openModal('Twitter/X Content')">Get Free Pack</button>
+        <button class="get-btn" onclick="openModal()">Get Free Pack</button>
       </div>
       
       <div class="pack-card">
@@ -304,7 +304,7 @@
         <p class="pack-count">9 Prompts</p>
         <p class="pack-desc">Hooks, scripts, thumbnails.</p>
         <div class="free-label">FREE</div>
-        <button class="get-btn" onclick="openModal('YouTube Content')">Get Free Pack</button>
+        <button class="get-btn" onclick="openModal()">Get Free Pack</button>
       </div>
       
       <div class="pack-card">
@@ -313,7 +313,7 @@
         <p class="pack-count">9 Prompts</p>
         <p class="pack-desc">Sequences, launches, newsletters.</p>
         <div class="free-label">FREE</div>
-        <button class="get-btn" onclick="openModal('Email Marketing')">Get Free Pack</button>
+        <button class="get-btn" onclick="openModal()">Get Free Pack</button>
       </div>
       
       <div class="pack-card">
@@ -322,7 +322,7 @@
         <p class="pack-count">9 Prompts</p>
         <p class="pack-desc">SEO, how-tos, listicles.</p>
         <div class="free-label">FREE</div>
-        <button class="get-btn" onclick="openModal('Blog Writing')">Get Free Pack</button>
+        <button class="get-btn" onclick="openModal()">Get Free Pack</button>
       </div>
     </section>
     
@@ -334,7 +334,7 @@
         <p class="pack-count">54 Prompts</p>
         <p class="pack-desc">Everything you need. Complete set.</p>
         <div class="free-label">FREE</div>
-        <button class="get-btn" onclick="openModal('All 6 Packs')">Get All Free</button>
+        <button class="get-btn" onclick="openModal()">Get All Free</button>
       </div>
     </section>
     
@@ -349,52 +349,26 @@
   <!-- Email Modal -->
   <div class="modal" id="emailModal">
     <div class="modal-content">
-      <h3 id="modalTitle">Get Your Free Pack</h3>
-      <p>Enter your email and we'll send the <span id="modalPack">prompts</span> right to your inbox.</p>
-      <form id="emailForm" onsubmit="handleSubmit(event)">
-        <input type="email" class="modal-input" id="emailInput" placeholder="your@email.com" required>
-        <input type="hidden" id="packSelect" value="">
-        <button type="submit" class="get-btn" style="width: 100%;">Send Me the Prompts</button>
-      </form>
-      <p class="success-msg" id="successMsg">✅ Check your email! We sent the prompts.</p>
+      <h3>Get Your Free Prompts</h3>
+      <p>Enter your email and we'll send the prompts right to your inbox.</p>
+      
+      <!-- ConvertKit Form -->
+      <script async data-uid="53cdd437d8" src="https://prompt-packs.kit.com/53cdd437d8/index.js"></script>
+      <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 12px;">We respect your privacy. No spam.</p>
+      
       <button class="modal-close" onclick="closeModal()">&times;</button>
     </div>
   </div>
   
   <script>
-    function openModal(packName) {
-      document.getElementById('modalTitle').textContent = 'Get Your Free ' + packName + ' Pack';
-      document.getElementById('modalPack').textContent = packName;
-      document.getElementById('packSelect').value = packName;
+    function openModal() {
       document.getElementById('emailModal').classList.add('active');
-      document.getElementById('emailInput').focus();
     }
     
     function closeModal() {
       document.getElementById('emailModal').classList.remove('active');
-      document.getElementById('successMsg').classList.remove('show');
-      document.getElementById('emailForm').style.display = 'block';
     }
     
-    function handleSubmit(e) {
-      e.preventDefault();
-      const email = document.getElementById('emailInput').value;
-      const pack = document.getElementById('packSelect').value;
-      
-      // Log the signup (in production, send to backend/email service)
-      console.log('NEW SIGNUP:', email, pack);
-      
-      // Show success
-      document.getElementById('emailForm').style.display = 'none';
-      document.getElementById('successMsg').classList.add('show');
-      
-      // In production: send to ConvertKit/Mailchimp/Google Sheets
-      alert('Thanks! In production, the ' + pack + ' prompts would be sent to ' + email);
-      
-      setTimeout(closeModal, 2000);
-    }
-    
-    // Close modal on outside click
     document.getElementById('emailModal').addEventListener('click', function(e) {
       if (e.target === this) closeModal();
     });
