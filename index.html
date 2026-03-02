@@ -332,8 +332,14 @@
       <h3>Get Your Free Prompts</h3>
       <p>Enter your email and we'll send the prompts directly to your inbox. <strong>No spam, just prompts.</strong></p>
       
-      <!-- ConvertKit Form (captures email) -->
-      <script async data-uid="53cdd437d8" src="https://prompt-packs.kit.com/53cdd437d8/index.js"></script>
+      <!-- Direct ConvertKit form -->
+      <form id="emailForm" onsubmit="handleSubmit(event)">
+        <input type="email" id="email" name="email_address" required 
+          placeholder="your@email.com" 
+          style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; margin-bottom: 12px;">
+        <button type="submit" class="get-btn" style="width: 100%;">Send Me the Prompts</button>
+      </form>
+      
       <div id="successContent" style="display: none; text-align: left; margin-top: 16px;">
         <p style="color: #10b981; font-weight: 600; margin-bottom: 12px;">✅ Check your inbox! (Download here:)</p>
         <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -347,8 +353,6 @@
       </div>
       
       <button class="modal-close" onclick="closeModal()">&times;</button>
-      
-      <button class="modal-close" onclick="closeModal()">&times;</button>
     </div>
   </div>
   
@@ -356,19 +360,46 @@
     function openModal() {
       document.getElementById('emailModal').classList.add('active');
       document.getElementById('successContent').style.display = 'none';
+      document.getElementById('emailForm').style.display = 'block';
     }
     
     function closeModal() {
       document.getElementById('emailModal').classList.remove('active');
     }
     
-    // Detect ConvertKit form submit and show download links
-    document.addEventListener('submit', function(e) {
-      if (e.target.action && e.target.action.includes('kit.com')) {
-        e.preventDefault();
-        document.getElementById('successContent').style.display = 'block';
+    // Handle form submission to ConvertKit
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      
+      try {
+        const res = await fetch('https://api.convertkit.com/v3/forms/9150063/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            api_key: '7CxZsSYy2tyB7tyrAWb_GQ',
+            email: email
+          })
+        });
+        const data = await res.json();
+        
+        if (data.subscription || data.error === 'already subscribed') {
+          document.getElementById('emailForm').style.display = 'none';
+          document.getElementById('successContent').style.display = 'block';
+        } else {
+          alert('Something went wrong. Please try again.');
+          btn.textContent = 'Send Me the Prompts';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        alert('Error: ' + err.message);
+        btn.textContent = 'Send Me the Prompts';
+        btn.disabled = false;
       }
-    });
+    }
     
     document.getElementById('emailModal').addEventListener('click', function(e) {
       if (e.target === this) closeModal();
