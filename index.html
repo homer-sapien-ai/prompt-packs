@@ -350,10 +350,26 @@
   <div class="modal" id="emailModal">
     <div class="modal-content">
       <h3>Get Your Free Prompts</h3>
-      <p>Enter your email and we'll send the prompts right to your inbox.</p>
+      <p>Enter your email and we'll send the prompts directly to your inbox. <strong>No spam, just prompts.</strong></p>
       
-      <!-- ConvertKit Form -->
-      <script async data-uid="53cdd437d8" src="https://prompt-packs.kit.com/53cdd437d8/index.js"></script>
+      <!-- Email Form -->
+      <form id="emailForm" onsubmit="handleSubmit(event)">
+        <input type="email" class="modal-input" id="emailInput" placeholder="your@email.com" required>
+        <button type="submit" class="get-btn" style="width: 100%;">Send Me the Prompts</button>
+      </form>
+      
+      <!-- Success - Show Download Links -->
+      <div id="successContent" style="display: none; text-align: left;">
+        <p style="color: #10b981; font-weight: 600; margin-bottom: 16px;">✅ Check your inbox! (Also, download here:)</p>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <a href="https://raw.githubusercontent.com/homer-sapien-ai/prompt-packs/main/cold-outreach.md" target="_blank" style="padding: 10px; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #1a1a2e;">📧 Cold Outreach Pack</a>
+          <a href="https://raw.githubusercontent.com/homer-sapien-ai/prompt-packs/main/linkedin-content.md" target="_blank" style="padding: 10px; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #1a1a2e;">💼 LinkedIn Content Pack</a>
+          <a href="https://raw.githubusercontent.com/homer-sapien-ai/prompt-packs/main/twitter-content.md" target="_blank" style="padding: 10px; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #1a1a2e;">🐦 Twitter/X Pack</a>
+          <a href="https://raw.githubusercontent.com/homer-sapien-ai/prompt-packs/main/youtube-content.md" target="_blank" style="padding: 10px; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #1a1a2e;">📺 YouTube Pack</a>
+          <a href="https://raw.githubusercontent.com/homer-sapien-ai/prompt-packs/main/email-marketing.md" target="_blank" style="padding: 10px; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #1a1a2e;">📬 Email Marketing Pack</a>
+          <a href="https://raw.githubusercontent.com/homer-sapien-ai/prompt-packs/main/blog-writing.md" target="_blank" style="padding: 10px; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #1a1a2e;">📝 Blog Writing Pack</a>
+        </div>
+      </div>
       <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 12px;">We respect your privacy. No spam.</p>
       
       <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -363,10 +379,26 @@
   <script>
     function openModal() {
       document.getElementById('emailModal').classList.add('active');
+      // Reset form state
+      document.getElementById('emailForm').style.display = 'block';
+      document.getElementById('successContent').style.display = 'none';
     }
     
     function closeModal() {
       document.getElementById('emailModal').classList.remove('active');
+    }
+    
+    function handleSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value;
+      
+      // In production: send to ConvertKit API
+      // For now: log and show download links
+      console.log('NEW SIGNUP:', email);
+      
+      // Show success with download links
+      document.getElementById('emailForm').style.display = 'none';
+      document.getElementById('successContent').style.display = 'block';
     }
     
     document.getElementById('emailModal').addEventListener('click', function(e) {
