@@ -359,16 +359,20 @@
     <section class="signup" id="signup">
       <h2>Get 10 Free AI Prompts</h2>
       <p>Join <span id="subscriber-count">2,340+</span> creators getting weekly prompt tips + early access to new packs.</p>
-      <form class="form-row" action="https://docs.google.com/forms/u/0/" target="_blank">
-        <input type="email" placeholder="Enter your email" required>
-        <button type="submit">Send Me Free Prompts</button>
-      </form>
-      <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 16px;">No spam. Unsubscribe anytime. (Form coming soon - email for early access)</p>
+      <!-- TODO: Replace with Google Form after creating at forms.google.com -->
+      <div class="form-row" style="margin-bottom: 16px;">
+        <input type="email" placeholder="Enter your email" id="email-input" style="flex:1;min-width:200px;padding:16px 20px;border:2px solid #e5e7eb;border-radius:10px;font-size:1rem;">
+        <button type="button" onclick="alert('Email: ' + document.getElementById('email-input').value + '\n\n(Google Form coming soon - this is a placeholder)')" style="padding:16px 32px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;">Send Me Free Prompts</button>
+      </div>
+      <p style="font-size: 0.8rem; color: #9ca3af;">No spam. Unsubscribe anytime.</p>
     </section>
     
     <footer>
-      © 2026 Prompt Packs. All rights reserved.<br>
-      <a href="https://github.com/homer-sapien-ai/prompt-packs" style="color: #667eea;">View on GitHub</a>
+      <p>© 2026 Prompt Packs. All rights reserved.</p>
+      <p style="margin-top: 8px; font-size: 0.85rem;">
+        <a href="https://github.com/homer-sapien-ai/prompt-packs" style="color: #667eea;">View on GitHub</a> 
+        · Payments via Lemon Squeezy (coming soon)
+      </p>
     </footer>
   </div>
 </body>
