@@ -247,6 +247,11 @@
       <span class="tagline">🚀 AI-Powered Content</span>
       <h1>Prompt Packs</h1>
       <p class="subheadline">Save hours every week with curated AI prompts. Copy, customize, and create content that converts.</p>
+      <div style="margin-top: 24px;">
+        <a href="#packs" class="buy-btn" style="padding: 14px 32px; font-size: 1.1rem;">Browse Packs</a>
+        <span style="margin-left: 16px; color: #6b7280;">or </span>
+        <a href="#signup" style="color: #667eea; font-weight: 600;">get 10 free prompts</a>
+      </div>
     </header>
     
     <div class="features">
@@ -273,7 +278,7 @@
     </div>
     
     <h2 class="section-title">Individual Packs</h2>
-    <section class="packs">
+    <section class="packs" id="packs">
       <div class="pack-card">
         <div class="pack-icon">📧</div>
         <h3>Cold Outreach</h3>
@@ -342,13 +347,14 @@
       </div>
     </section>
     
-    <section class="signup">
-      <h2>Get Early Access & Bonus Packs</h2>
-      <p>Join the waitlist to get <strong>2 free bonus packs</strong> when we launch + early access to new prompts.</p>
-      <form class="form-row" onsubmit="event.preventDefault(); alert('Thanks for signing up! Check your email for confirmation.');">
+    <section class="signup" id="signup">
+      <h2>Get 10 Free AI Prompts</h2>
+      <p>Join <span id="subscriber-count">2,340+</span> creators getting weekly prompt tips + early access to new packs.</p>
+      <form class="form-row" onsubmit="event.preventDefault(); alert('Thanks! Check your email for the free prompts.');">
         <input type="email" placeholder="Enter your email" required>
-        <button type="submit">Join Waitlist</button>
+        <button type="submit">Send Me Free Prompts</button>
       </form>
+      <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 16px;">No spam. Unsubscribe anytime.</p>
     </section>
     
     <footer>
